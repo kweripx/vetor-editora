@@ -1,8 +1,11 @@
 class InstrumentMailer < ApplicationMailer
-  def instrument_email(evaluated, instrument)
-    @evaluated = evaluated
-    @instrument = instrument
-    @instrument_application = InstrumentApplication.find_by(evaluated: @evaluated, instrument: @instrument)
+  include Rails.application.routes.url_helpers
+
+  def instrument_email(instrument_application)
+    @instrument_application = instrument_application
+    @evaluated = instrument_application.evaluated
+    @instrument = instrument_application.instrument
+
     mail(to: @evaluated.email, subject: 'Novo instrumento psicológico disponível')
   end
 end

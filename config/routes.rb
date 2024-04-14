@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :evaluateds, only: [] do
-    get 'fill_data', to: 'evaluateds#fill_data'
+    get 'fill_data', to: 'evaluateds#fill_data', as: 'fill_data'
     post 'start_instrument', to: 'evaluateds#start_instrument'
   end
 

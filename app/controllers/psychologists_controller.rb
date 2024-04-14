@@ -10,14 +10,20 @@ class PsychologistsController < ApplicationController
 
   def apply_instrument
     evaluated = current_psychologist.evaluateds.find(params[:evaluated_id])
-    instrument = current_psychologist.instruments.find(params[:instrument_id])
-    InstrumentApplication.create(evaluated: evaluated, instrument: instrument)
-    InstrumentMailer.instrument_email(evaluated, instrument).deliver_now
-    redirect_to psychologist_evaluated_path(current_psychologist, evaluated)
+    instrument = Instrument.find(params[:instrument_id])
+    instrument_application = InstrumentApplication.create(evaluated: evaluated, instrument: instrument)
+
+    if instrument_application.persisted?
+      InstrumentMailer.instrument_email(instrument_application).deliver_now
+      redirect_to psychologist_evaluated_path(current_psychologist, evaluated), notice: 'Instrument applied successfully'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show_instrument_result
     @instrument_application = InstrumentApplication.find(params[:id])
+    render 'show_evaluated'
   end
 
   private

@@ -6,6 +6,6 @@
 
 <p>Clique no link abaixo para acessar o instrumento:</p>
 
-<p><%= link_to 'Acessar Instrumento', fill_data_evaluated_url(token: @instrument_application.token) %></p>
+<p><%= link_to 'Acessar Instrumento', evaluated_fill_data_url(@instrument_application.evaluated_id) %></p>
 
 <p>Obrigado!</p>

@@ -1,6 +1,9 @@
 class EvaluatedsController < ApplicationController
   def fill_data
     @instrument_application = InstrumentApplication.find_by(token: params[:token])
+    if @instrument_application.nil?
+      return "Invalid or expired token."
+    end
   end
 
   def start_instrument
