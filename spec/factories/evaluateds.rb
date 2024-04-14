@@ -4,6 +4,6 @@ FactoryBot.define do
     email { 'evaluated@example.com' }
     cpf { '123.456.789-00' }
     birth_date { '2000-01-01' }
-    psychologist
+    psychologist { create(:psychologist) }
   end
 end
