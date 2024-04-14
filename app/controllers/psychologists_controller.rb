@@ -1,0 +1,2 @@
+class PsychologistsController < ApplicationController
+end
