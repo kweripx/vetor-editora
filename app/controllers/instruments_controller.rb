@@ -7,7 +7,6 @@ class InstrumentsController < ApplicationController
     instrument_application = InstrumentApplication.find(params[:instrument_application_id])
     score = calculate_score(params[:answers])
     instrument_application.update(score: score, status: 'finished')
-    redirect_to root_path
   end
 
   private

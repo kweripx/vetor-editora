@@ -1,7 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe "Instruments", type: :request do
-  describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+  describe "POST #submit_answers" do
+    let(:instrument_application) { create(:instrument_application) }
+    let(:answers) { ['1', '2', '3', '1', '2'] }
+
+    it "updates the instrument application with the calculated score" do
+      post instrument_submit_answers_path(instrument_application.id), params: { instrument_application_id: instrument_application.id, answers: answers }
+      instrument_application.reload
+      expect(instrument_application.score).to eq(11)
+      expect(instrument_application.status).to eq('finished')
+    end
+
+    it "expect response" do
+      post instrument_submit_answers_path(instrument_application.id), params: { instrument_application_id: instrument_application.id, answers: answers }
+      expect(response)
+    end
   end
 end

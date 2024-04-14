@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_14_030059) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_14_191707) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,8 +32,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_030059) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "token"
     t.index ["evaluated_id"], name: "index_instrument_applications_on_evaluated_id"
     t.index ["instrument_id"], name: "index_instrument_applications_on_instrument_id"
+    t.index ["token"], name: "index_instrument_applications_on_token", unique: true
   end
 
   create_table "instruments", force: :cascade do |t|
