@@ -22,6 +22,8 @@ services:
       - "3000:3000"
     depends_on:
       - postgres
+    environment:
+      - SECRET_KEY_BASE=78bd1a48696ef7c9da44c09f0d3e3f97
 
 volumes:
   postgres:

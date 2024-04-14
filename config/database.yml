@@ -1,28 +1,26 @@
 default: &default
   adapter: postgresql
+  database: "<%= ENV.fetch('POSTGRES_DATABASE', 'editora') %>"
   encoding: unicode
-  host: <%= ENV.fetch('POSTGRES_HOST', 'localhost') %>
-  port: <%= ENV.fetch('POSTGRES_PORT', '5432') %>
-   # ref: https://github.com/mperham/sidekiq/issues/2985#issuecomment-531097962
-  pool: ENV.fetch('RAILS_MAX_THREADS', 5) %>
-  variables:
-    # we are setting this value to be close to the racktimeout value. we will iterate and reduce this value going forward
-    statement_timeout: <%= ENV["POSTGRES_STATEMENT_TIMEOUT"] || "14s" %>
+  host: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS', 25) %> 
 
 development:
   <<: *default
-  database: "<%= ENV.fetch('POSTGRES_DATABASE', 'editora_dev') %>"
-  username: "<%= ENV.fetch('POSTGRES_USERNAME', 'postgres') %>"
-  password: "<%= ENV.fetch('POSTGRES_PASSWORD', '') %>"
-
+  database: "<%= ENV.fetch('POSTGRES_DATABASE', 'editora') %>"
+  username: postgres
+  password: postgres
 test:
   <<: *default
-  database: "<%= ENV.fetch('POSTGRES_DATABASE', 'editora_test') %>"
-  username: "<%= ENV.fetch('POSTGRES_USERNAME', 'postgres') %>"
-  password: "<%= ENV.fetch('POSTGRES_PASSWORD', '') %>"
+  database: "<%= ENV.fetch('POSTGRES_DATABASE', 'editora') %>"
+  username: postgres
+  password: postgres
 
 production:
   <<: *default
-  database: "<%= ENV.fetch('POSTGRES_DATABASE', 'editora_production') %>"
-  username: "<%= ENV.fetch('POSTGRES_USERNAME', 'postgres') %>"
-  password: "<%= ENV.fetch('POSTGRES_PASSWORD', 'postgres') %>"
+  database: "<%= ENV.fetch('POSTGRES_DATABASE', 'editora') %>"
+  username: postgres
+  password: postgres
