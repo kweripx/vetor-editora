@@ -5,7 +5,8 @@ class EvaluatedsController < ApplicationController
 
   def start_instrument
     instrument_application = InstrumentApplication.find_by(token: params[:token])
-    instrument_application.update(evaluated_params)
+    evaluated = instrument_application.build_evaluated(evaluated_params)
+    evaluated.save
     redirect_to instrument_path(instrument_application.instrument)
   end
 

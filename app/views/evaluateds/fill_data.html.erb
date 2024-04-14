@@ -1,0 +1,16 @@
+<h1>Preencha seus dados</h1>
+<%= form_with(model: @instrument_application.evaluated, url: evaluated_start_instrument_path(evaluated_id: @instrument_application.id), local: true) do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+
+  <%= form.label :cpf %>
+  <%= form.text_field :cpf %>
+
+  <%= form.label :birth_date %>
+  <%= form.date_field :birth_date %>
+
+  <%= form.submit 'Próximo' %>
+<% end %>

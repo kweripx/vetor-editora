@@ -1,9 +1,17 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_psychologist
+  before_action :authenticate_psychologist
 
   private
 
+  def authenticate_psychologist
+    if session[:psychologist_id].present?
+      @current_psychologist = Psychologist.find_by(id: session[:psychologist_id])
+    else
+      return 'Por favor, faça login para continuar.'
+    end
+  end
+
   def current_psychologist
-    @current_psychologist ||= Psychologist.find(session[:psychologist_id]) if session[:psychologist_id]
+    @current_psychologist
   end
 end

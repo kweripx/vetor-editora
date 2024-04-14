@@ -1,0 +1,13 @@
+<h1>Avaliado: <%= @evaluated.name %></h1>
+
+<h2>Instrumentos Aplicados:</h2>
+<ul>
+  <% @evaluated.instrument_applications.each do |application| %>
+    <li>
+      <%= application.instrument.name %>
+      <% if application.status == 'finished' %>
+        <%= link_to 'Ver Resultado', psychologist_instrument_result_path(current_psychologist, application) %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

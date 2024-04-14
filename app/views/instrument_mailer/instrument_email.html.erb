@@ -1,0 +1,11 @@
+<h1>Olá, <%= @evaluated.name %>!</h1>
+
+<p>Um novo instrumento psicológico está disponível para você:</p>
+
+<p><%= @instrument.name %></p>
+
+<p>Clique no link abaixo para acessar o instrumento:</p>
+
+<p><%= link_to 'Acessar Instrumento', fill_data_evaluated_url(token: @instrument_application.token) %></p>
+
+<p>Obrigado!</p>
